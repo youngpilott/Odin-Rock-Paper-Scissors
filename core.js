@@ -3,18 +3,36 @@
 console.log("Hello World");
 
 function getComputerChoice() {
-    console.log(Math.floor(Math.random() * 3))
+    let computerChoice = Math.floor(Math.random() * 3);
+    console.log(computerChoice);
+    if (computerChoice == 1) {
+        computerChoice = "rock";
+    } if (computerChoice == 2) {
+        computerChoice = "paper"
+    }
+     else {
+        computerChoice = "scissors"
+    }
+    return computerChoice;
 }
 
 function getHumanChoice() {
-    console.log(prompt("what is your choice?"));
+    let humanChoice = prompt("what is your choice?");
+    console.log(humanChoice);
+    return humanChoice;
 }
 
 function playRound(humanChoice, computerChoice) {
-    
+    if (humanChoice == "rock" && computerChoice == "paper") {
+        return computerScore++;
+    } else if (humanChoice == "rock" && computerChoice == "scissors") {
+        return humanScore++;
+    }
 }
-let humanScore, computerScore = 0
-let humanChoide = getComputerChoice()
-let computerChoice = getHumanChoice()
+let humanScore = 0;
+let computerScore = 0;
+let computerChoice = getComputerChoice();
+let humanChoice = getHumanChoice();
 
-playRound()
+playRound(humanChoice, computerChoice)
+console.log(humanScore, computerScore);
