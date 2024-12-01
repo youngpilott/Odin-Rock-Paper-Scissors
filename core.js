@@ -1,5 +1,3 @@
-"use strict";
-
 
 function getComputerChoice() {
     let computerChoice = Math.floor(Math.random() * 3);
@@ -17,10 +15,14 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    let humanChoice = prompt("what is your choice?");
-    console.log("Human choice:", humanChoice);
-    return humanChoice;
-}
+    const selectionButton = document.querySelectorAll(".player-selection");
+    selectionButton.forEach(button => {
+        button.addEventListener("click", (event) => {
+            const choice = event.target.value;
+            console.log(`Clicked choice: ${choice}`);
+            return choice;
+        })
+    });
 
 function playRound(humanChoice, computerChoice) {
     if (humanChoice == "rock" && computerChoice == "scissors") {
@@ -36,31 +38,43 @@ function playRound(humanChoice, computerChoice) {
 
 let humanScore = 0;
 let computerScore = 0;
-let round = 0;
 
-while (round < 5) {
-    console.log(`====== ROUND ${round + 1} ======`);
-    const computerChoice = getComputerChoice();
-    const humanChoice = getHumanChoice();
+const round = document.querySelector('button.play-round');
+
+console.log(round);
+round.addEventListener("click", function (params) {
+    console.log("123")
+});
+
+getHumanChoice();
+
+// round.addEventListener("click", function () {
+//     console.log(123);
     
-    if (humanChoice != "rock" && humanChoice != "page" && humanChoice != "scissors") {
-        console.log("Invalid Choice");
-        break;
-    }
-    playRound(humanChoice, computerChoice);
-    console.log(humanScore, computerScore);
-    round++;
-}
+// })
+// while (round < 5) {
+//     console.log(`====== ROUND ${round + 1} ======`);
+//     const computerChoice = getComputerChoice();
+//     const humanChoice = getHumanChoice();
+    
+//     if (humanChoice != "rock" && humanChoice != "page" && humanChoice != "scissors") {
+//         console.log("Invalid Choice");
+//         break;
+//     }
+//     playRound(humanChoice, computerChoice);
+//     console.log(humanScore, computerScore);
+//     round++;
+// }
 
-switch (round) {
-    case 5:
-        if (humanScore < computerScore) {
-            console.log(`Computer is winner with ${computerScore} points`);
-        } else {
-            console.log(`Computer is winner with ${humanScore} points`);
-        }
-        break;
-    default:
-        console.log("NOT enough rounds!");
-}
+// switch (round) {
+//     case 5:
+//         if (humanScore < computerScore) {
+//             console.log(`Computer is winner with ${computerScore} points`);
+//         } else {
+//             console.log(`Computer is winner with ${humanScore} points`);
+//         }
+//         break;
+//     default:
+//         console.log("NOT enough rounds!");
+// }
 
