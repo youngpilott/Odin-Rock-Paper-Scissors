@@ -11,70 +11,71 @@ function getComputerChoice() {
         computerChoice = "scissors"
     }
     console.log("Computer choice: ", computerChoice);
+    const showComputerChoice = document.querySelector(".computer-choice");
+    showComputerChoice.textContent = computerChoice;
     return computerChoice;
 }
 
 function getHumanChoice() {
     const selectionButton = document.querySelectorAll(".player-selection");
+    let choice = "";
+    const showHumanChoice = document.querySelector(".human-choice");
     selectionButton.forEach(button => {
         button.addEventListener("click", (event) => {
-            const choice = event.target.value;
+            choice = event.target.value;
             console.log(`Clicked choice: ${choice}`);
-            return choice;
+            showHumanChoice.textContent = choice;
         })
     });
+    const round = document.querySelector('button.play-round');
+    const showResult = document.querySelector(".show-result");
+    const result = document.createElement("h3");
+    round.addEventListener("click", function (event) {
+        playRound(choice, getComputerChoice());
+        if (humanScore === 5 || computerScore === 5) {
+            if (humanScore === 5) {
+                result.textContent = "Human is winner";
+            } else {
+                result.textContent = "AI is winner";
+            }
+            showResult.appendChild(result);
+            humanScore = 0;
+            computerScore = 0;
+            console.log(humanScore, computerScore);
+            humanPoint.textContent = humanScore;
+            computerPoint.textContent = computerScore;
+        }
+    });
+}
 
 function playRound(humanChoice, computerChoice) {
+    if (humanChoice !== "rock" && humanChoice !== "paper" && humanChoice !== "scissors") {
+        alert("Your choice is not valid");
+        return;
+    }
+
     if (humanChoice == "rock" && computerChoice == "scissors") {
-        return humanScore++;
-    } else if (humanChoice == "page" && computerChoice == "rock") {
-        return humanScore++;
-    } else if (humanChoice == "scissors" && computerChoice == "page") {
-        return humanScore++;
+        humanScore++;
+        humanPoint.textContent = humanScore;
+    } else if (humanChoice == "paper" && computerChoice == "rock") {
+        humanScore++;
+        humanPoint.textContent = humanScore;
+    } else if (humanChoice == "scissors" && computerChoice == "paper") {
+        humanScore++;
+        humanPoint.textContent = humanScore;
     } else {
-        return computerScore++;
+        computerScore++;
+        computerPoint.textContent = computerScore;
     }
 }
 
 let humanScore = 0;
 let computerScore = 0;
-
-const round = document.querySelector('button.play-round');
-
-console.log(round);
-round.addEventListener("click", function (params) {
-    console.log("123")
-});
+const humanPoint = document.querySelector(".human-point");
+const computerPoint = document.querySelector(".computer-point");
 
 getHumanChoice();
 
-// round.addEventListener("click", function () {
-//     console.log(123);
-    
-// })
-// while (round < 5) {
-//     console.log(`====== ROUND ${round + 1} ======`);
-//     const computerChoice = getComputerChoice();
-//     const humanChoice = getHumanChoice();
-    
-//     if (humanChoice != "rock" && humanChoice != "page" && humanChoice != "scissors") {
-//         console.log("Invalid Choice");
-//         break;
-//     }
-//     playRound(humanChoice, computerChoice);
-//     console.log(humanScore, computerScore);
-//     round++;
-// }
 
-// switch (round) {
-//     case 5:
-//         if (humanScore < computerScore) {
-//             console.log(`Computer is winner with ${computerScore} points`);
-//         } else {
-//             console.log(`Computer is winner with ${humanScore} points`);
-//         }
-//         break;
-//     default:
-//         console.log("NOT enough rounds!");
-// }
+
 

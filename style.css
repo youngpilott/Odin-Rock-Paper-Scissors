@@ -1,0 +1,21 @@
+.show-choice {
+    display: flex;
+}
+.player-container, .computer-container {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    flex: 1;
+}
+
+.play-round {
+    flex: 0 1 auto;
+    align-self: center;
+    padding: 15px 20px;
+}
+
+.show-result {
+    text-align: center;
+}
